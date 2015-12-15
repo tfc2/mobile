@@ -45,7 +45,7 @@ public class UploadStep3Activity extends BaseActivity {
 	private File mFile;
 	private Subject mSubject;
 
-	//@SuppressWarnings("deprecation")
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
