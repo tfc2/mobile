@@ -1115,15 +1115,27 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 		if (a.hasValue(R.styleable.PullToRefresh_ptrRefreshableViewBackground)) {
 			Drawable background = a.getDrawable(R.styleable.PullToRefresh_ptrRefreshableViewBackground);
 			if (null != background) {
+                // TODO testar substituir proxima linha por sugestao
 				mRefreshableView.setBackgroundDrawable(background);
-			}
+            }
 		} else if (a.hasValue(R.styleable.PullToRefresh_ptrAdapterViewBackground)) {
 			Utils.warnDeprecation("ptrAdapterViewBackground", "ptrRefreshableViewBackground");
 			Drawable background = a.getDrawable(R.styleable.PullToRefresh_ptrAdapterViewBackground);
 			if (null != background) {
+                // TODO testar substituir proxima linha por sugestao
 				mRefreshableView.setBackgroundDrawable(background);
-			}
+            }
 		}
+        /*
+        Sugestao um pouco mais correta:
+
+        int sdk = android.os.Build.VERSION.SDK_INT;
+        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            mRefreshableView.setBackgroundDrawable(background);
+        } else {
+            mRefreshableView.setBackground(background);
+        }
+        */
 
 		if (a.hasValue(R.styleable.PullToRefresh_ptrOverScroll)) {
 			mOverScrollEnabled = a.getBoolean(R.styleable.PullToRefresh_ptrOverScroll, true);

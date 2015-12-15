@@ -45,7 +45,7 @@ public class UploadStep3Activity extends BaseActivity {
 	private File mFile;
 	private Subject mSubject;
 
-	@SuppressWarnings("deprecation")
+	//@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -60,6 +60,12 @@ public class UploadStep3Activity extends BaseActivity {
 			bmpFactoryOptions.inSampleSize = 4;
 			bitmap = BitmapFactory.decodeFile(getIntent().getExtras().getString("foto"), bmpFactoryOptions);
 			drawable = new BitmapDrawable(bitmap);
+
+			/*
+			TODO testar substituir a declaracao do drawable por
+				drawable = new BitmapDrawable(mContext.getResources(), bitmap);
+			 */
+
 			mFile = new File(getIntent().getExtras().getString("foto"));
 		} else if (type.equals("video")) {
 			mFile = new File(getIntent().getExtras().getString("video"));
@@ -129,9 +135,22 @@ public class UploadStep3Activity extends BaseActivity {
 			}
 		});
 
-		if (type.equals("foto"))
-			ivPreview.setBackgroundDrawable(drawable);
-		if (type.equals("video"))
+		if (type.equals("foto")){
+            ivPreview.setBackgroundDrawable(drawable);
+
+            /*
+            TODO testar linha acima por
+
+            int sdk = android.os.Build.VERSION.SDK_INT;
+            if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                ivPreview.setBackgroundDrawable(drawable);
+            } else {
+                ivPreview.setBackground(drawable);
+            }
+            */
+        }
+
+        if (type.equals("video"))
 			ivPreview.setBackgroundResource(R.drawable.ic_midia_big);
 		if (type.equals("audio"))
 			ivPreview.setImageResource(R.drawable.ic_audio_big);

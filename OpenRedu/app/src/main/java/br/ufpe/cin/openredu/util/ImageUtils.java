@@ -115,18 +115,31 @@ public class ImageUtils {
 	@SuppressLint("NewApi")
 	@SuppressWarnings("deprecation")
 	public static Point getScreenDimensions(Context context) {
+        Point point = new Point();
 
-		Display display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 
-		Point point = new Point();
+		/*TODO testar sugestao de remocao do deprecation:
 
-		if (android.os.Build.VERSION.SDK_INT >= 13) {
-			display.getSize(point);
-		} else {
-			point.x = display.getWidth();
-			point.y = display.getHeight();
-		}
+		DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+		int width = metrics.widthPixels;
+		int height = metrics.heightPixels;
 
-		return point;
+		point.x = width;
+		point.y = height;
+		*/
+
+
+        // comeco da substituicao
+        Display display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+
+        if (android.os.Build.VERSION.SDK_INT >= 13) {
+            display.getSize(point);
+        } else {
+            point.x = display.getWidth();
+            point.y = display.getHeight();
+        }
+        // final da substituicao
+
+        return point;
 	}
 }

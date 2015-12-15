@@ -87,22 +87,35 @@ public class WebCachedImageView extends ImageView {
 			bitmapWorkerTask.execute(url, mCacheMgr, mWidth, mHeight);
 		}
 	}
-	
+
 	@SuppressLint("NewApi")
 	@SuppressWarnings("deprecation")
 	private static Point getScreenDimensions(Context context) {
 		Point size = new Point();
-		
+
+        /*
+		TODO testar sugestao de remocao do deprecation:
+
+		DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+		int width = metrics.widthPixels;
+		int height = metrics.heightPixels;
+
+		size.x = width;
+		size.y = height;
+		*/
+
+        // comeco da substituicao
 		WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
 		Display display = wm.getDefaultDisplay();
-		
+
 		if (Build.VERSION.SDK_INT >= 13) {
 			display.getSize(size);
 		} else {
 			size.x = display.getWidth();
 			size.y = display.getHeight();
 		}
-		
+        // fim da substituicao
+
 		return size;
 	}
 	
